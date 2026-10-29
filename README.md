@@ -36,6 +36,12 @@ Most postings close within two weeks, and I was losing time to copying the same 
 2. Replace the made-up postings in `demo-db.js` (the `SEED` object) with your own. The fields are in `docs/data-model.md`.
 3. Optional: swap `demo-db.js` for a real shared database (Firebase, Supabase or a small API). The page only calls `collection(name).onSnapshot(cb)`, `doc(path).onSnapshot(cb)` and `doc(path).update(fields)`.
 
+## Optional: let an AI assistant help, with you in charge
+
+The tracker keeps everything in one database, so an AI assistant that you give access to can read it and help: score new postings against your profile, suggest how to tailor your resume and cover letter wording to a posting, and point out patterns in the Trends and funnel numbers. You choose what it can see. You edit and check every document it drafts, and you submit each application yourself. Nothing in this repo submits an application.
+
+Before you use AI on an application, read the employer's and the job portal's rules. Some ask you not to use AI, or to say if you did, and some portals do not allow automated submissions. If in doubt, say how you used it.
+
 ## How the "hot" part works
 
 A posting is hot when it is not applied, not hidden, scores 40 or more and was found or posted in the last 72 hours. The age comes from `firstSeen` (a timestamp your scan sets when it adds the posting) or, if that is missing, the posted date. See `isHot()` in `index.html`.
