@@ -18,6 +18,8 @@ A one-page tracker for a student co-op search. It puts the **newest postings fir
 
 Also: a weekly application goal with a streak, and light and dark themes.
 
+**Keyboard:** `Option+1` to `Option+5` (`Alt+1` to `Alt+5` on Windows) jump to Hottest, Jobs, Events, Timeline and Trends. `/` focuses the search box and `Esc` clears it.
+
 | Hottest | Events |
 |---|---|
 | ![Hottest tab](docs/img/hot.png) | ![Events tab](docs/img/events.png) |

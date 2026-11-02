@@ -157,11 +157,11 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid 
       <div class="sub" id="sub">loading</div>
     </div>
     <div class="tabs" role="tablist">
-      <button role="tab" id="t-hot" aria-selected="true" data-tab="hot">Hottest</button>
-      <button role="tab" id="t-jobs" aria-selected="false" data-tab="jobs">Jobs</button>
-      <button role="tab" id="t-events" aria-selected="false" data-tab="events">Events</button>
-      <button role="tab" id="t-timeline" aria-selected="false" data-tab="timeline">Timeline</button>
-      <button role="tab" id="t-trends" aria-selected="false" data-tab="trends">Trends</button>
+      <button role="tab" id="t-hot" aria-selected="true" data-tab="hot" title="Hottest (Option+1, Alt+1 on Windows)" aria-keyshortcuts="Alt+1">Hottest</button>
+      <button role="tab" id="t-jobs" aria-selected="false" data-tab="jobs" title="Jobs (Option+2, Alt+2 on Windows)" aria-keyshortcuts="Alt+2">Jobs</button>
+      <button role="tab" id="t-events" aria-selected="false" data-tab="events" title="Events (Option+3, Alt+3 on Windows)" aria-keyshortcuts="Alt+3">Events</button>
+      <button role="tab" id="t-timeline" aria-selected="false" data-tab="timeline" title="Timeline (Option+4, Alt+4 on Windows)" aria-keyshortcuts="Alt+4">Timeline</button>
+      <button role="tab" id="t-trends" aria-selected="false" data-tab="trends" title="Trends (Option+5, Alt+5 on Windows)" aria-keyshortcuts="Alt+5">Trends</button>
     </div>
   </div>
 
@@ -591,6 +591,8 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid 
   });
   document.addEventListener('input', function (e) { if (e.target.id === 'gq') { q = e.target.value; showTab('jobs'); render(); $('gq-k').hidden = !!q; } });
   document.addEventListener('keydown', function (e) {
+    // Option+1 to 5 (Alt on Windows) switch tabs. Match the physical key, because Option+number types a symbol on a Mac.
+    if (e.altKey && !e.ctrlKey && !e.metaKey && /^Digit[1-5]$/.test(e.code)) { e.preventDefault(); showTab(['hot', 'jobs', 'events', 'timeline', 'trends'][+e.code.slice(5) - 1]); return; }
     var tag = (document.activeElement && document.activeElement.tagName) || '';
     if (e.key === '/' && tag !== 'INPUT' && tag !== 'SELECT') { e.preventDefault(); $('gq').focus(); }
     if (e.key === 'Escape' && document.activeElement === $('gq')) { $('gq').value = ''; q = ''; $('gq-k').hidden = false; $('gq').blur(); render(); }
