@@ -590,9 +590,26 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid 
     }
   });
   document.addEventListener('input', function (e) { if (e.target.id === 'gq') { q = e.target.value; showTab('jobs'); render(); $('gq-k').hidden = !!q; } });
+  // Option+1 to 5 (Alt on Windows) switch tabs. Listens on the window in the capture phase so nothing else can swallow it,
+  // and matches the physical key (e.code), because Option+number types a symbol on a Mac. Also accepts e.key / keyCode as a fallback.
+  var TAB_KEYS = ['hot', 'jobs', 'events', 'timeline', 'trends'];
+  function tabKeyIndex(e) {
+    var m = /^(?:Digit|Numpad)([1-5])$/.exec(e.code || '');
+    if (m) return +m[1] - 1;
+    if (e.keyCode >= 49 && e.keyCode <= 53) return e.keyCode - 49;
+    if (e.keyCode >= 97 && e.keyCode <= 101) return e.keyCode - 97;
+    return -1;
+  }
+  window.addEventListener('keydown', function (e) {
+    if (!e.altKey || e.ctrlKey || e.metaKey) return;
+    var i = tabKeyIndex(e);
+    if (i < 0) return;
+    e.preventDefault(); e.stopPropagation(); showTab(TAB_KEYS[i]);
+  }, true);
+  // Keyboard events only reach the page when it has focus: take focus on load and on any tap or click.
+  function takeFocus() { try { window.focus(); if (document.activeElement === document.body || !document.activeElement) { document.body.setAttribute('tabindex', '-1'); document.body.focus({ preventScroll: true }); } } catch (_) {} }
+  window.addEventListener('load', takeFocus); document.addEventListener('pointerdown', takeFocus, true); takeFocus();
   document.addEventListener('keydown', function (e) {
-    // Option+1 to 5 (Alt on Windows) switch tabs. Match the physical key, because Option+number types a symbol on a Mac.
-    if (e.altKey && !e.ctrlKey && !e.metaKey && /^Digit[1-5]$/.test(e.code)) { e.preventDefault(); showTab(['hot', 'jobs', 'events', 'timeline', 'trends'][+e.code.slice(5) - 1]); return; }
     var tag = (document.activeElement && document.activeElement.tagName) || '';
     if (e.key === '/' && tag !== 'INPUT' && tag !== 'SELECT') { e.preventDefault(); $('gq').focus(); }
     if (e.key === 'Escape' && document.activeElement === $('gq')) { $('gq').value = ''; q = ''; $('gq-k').hidden = false; $('gq').blur(); render(); }
