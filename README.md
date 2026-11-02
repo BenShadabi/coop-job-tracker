@@ -42,6 +42,8 @@ Most postings close within two weeks, and I was losing time to copying the same 
 
 The tracker keeps everything in one database, so an AI assistant that you give access to can read it and help: score new postings against your profile, suggest how to tailor your resume and cover letter wording to a posting, and point out patterns in the Trends and funnel numbers. You choose what it can see. You edit and check every document it drafts, and you submit each application yourself. Nothing in this repo submits an application.
 
+**Companion project:** [resume-builder-skill](https://github.com/BenShadabi/resume-builder-skill) is a Claude skill that builds an honest one-page resume (and a cover letter and prep sheet) for each posting you pick here, using only your answers and files. The tracker shows what to apply to; the skill builds each package.
+
 Before you use AI on an application, read the employer's and the job portal's rules. Some ask you not to use AI, or to say if you did, and some portals do not allow automated submissions. If in doubt, say how you used it.
 
 ## How the "hot" part works
