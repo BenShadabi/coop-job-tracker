@@ -32,6 +32,8 @@ Also: a weekly application goal with a streak, and light and dark themes.
 
 Most postings close within two weeks, and I was losing time to copying the same details between tabs. I wanted one page that shows what is new, what I have already prepared and what I have applied to. I built it with Claude Code and use it every day in my own search. I can explain how every part works, and `docs/how-it-works.md` walks through it.
 
+Four classmates use it now to spend less time on job-hunt admin and more on applying and studying, and I am sharing it with students in other programs.
+
 ## Make it yours (5 minutes)
 
 1. Open `index.html` and edit the three values in `CONFIG` near the top of the script: your city, your term and the chip label.
